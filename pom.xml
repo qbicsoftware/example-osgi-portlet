@@ -151,14 +151,6 @@
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/main/webapp</directory>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -230,6 +222,14 @@
 				<osgi.scope>compile</osgi.scope>
 			</properties>
 			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+					<resource>
+						<directory>src/main/webapp</directory>
+					</resource>
+				</resources>
 				<plugins>
 					<plugin>
 						<groupId>org.eclipse.jetty</groupId>
@@ -284,6 +284,19 @@
 				<packaging.type>jar</packaging.type>
 				<osgi.scope>provided</osgi.scope>
 			</properties>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+					<resource>
+						<directory>src/main/webapp</directory>
+						<excludes>
+							<exclude>**/web.xml</exclude>
+						</excludes>
+					</resource>
+				</resources>
+			</build>
 		</profile>
 		<profile>
 			<!-- For more information about the origin of this profile, see:
