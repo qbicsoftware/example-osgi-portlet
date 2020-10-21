@@ -1,1 +1,0 @@
-# example-osgi-portlet
