@@ -13,7 +13,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil
  */
 class GroovyCar {
 
-  private static final Log log = LogFactoryUtil.getLog(MyPortletUI.class)
+  private static final Log log = LogFactoryUtil.getLog(GroovyCar.class)
 
   private static boolean engineOff = true
 
