@@ -20,7 +20,7 @@ To run the application as servlet locally, check out the latest commit
 locally, and run the following command in your command line:
 
 ```
-mvn clean -P no-liferay install jetty:run
+mvn -P no-liferay clean jetty:run
 ```
 
 This will run the server listening on the localhost port 8080 and can be
@@ -32,7 +32,7 @@ In order to provide the application as an OSGi bundle, run the following
 command:
 
 ```
-mvn clean -P liferay package
+mvn -P liferay clean package
 ```
 
 This will create the OSGi bundle as JAR archive under the directory
