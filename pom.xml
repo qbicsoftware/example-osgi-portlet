@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
-
+    
 		<groovy.version>3.0.6</groovy.version>
 
 		<liferay.version>7.3.5</liferay.version>
@@ -37,7 +37,6 @@
 			<id>maven-central</id>
 			<name>Maven central</name>
 			<url>https://repo.maven.apache.org/maven2</url>
-		</repository>
 
 		<!-- QBiC Nexus Repo -->
 		<repository>
@@ -72,7 +71,6 @@
 			<id>liferay-public</id>
 			<url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
 		</repository>
-
 	</repositories>
 
 	<dependencyManagement>
@@ -92,7 +90,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>release.portal.bom</artifactId>
@@ -108,7 +105,6 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-
 		</dependencies>
 	</dependencyManagement>
 
