@@ -22,11 +22,10 @@ import org.osgi.service.component.annotations.ServiceScope;
         service = UI.class,
         property = {
         "com.liferay.portlet.display-category=category.sample",  // Widget category
-        "javax.portlet.name=MyVaadinPortlet",                    // Unique portlet name in Liferay
+        "javax.portlet.name=example-portlet-1.1.0",       // Unique portlet name in Liferay
         "javax.portlet.display-name=OSGi Portlet",               // Portlet display name
         "javax.portlet.security-role-ref=power-user,user",       // Default user roles
-        "com.vaadin.osgi.liferay.portlet-ui=true",
-        "service.ranking:Integer=1000"},              // Is Vaadin UI?
+        "com.vaadin.osgi.liferay.portlet-ui=true" },             // Is Vaadin UI?
         scope = ServiceScope.PROTOTYPE)  // New instance created for each distinct request. Mandatory.
 public class MyPortletUI extends UI {
     private static final Log log = LogFactoryUtil.getLog(MyPortletUI.class);
