@@ -98,7 +98,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-client</artifactId>
+			<artifactId>vaadin-client-compiled</artifactId>
 			<scope>${osgi.scope}</scope>
 		</dependency>
 
