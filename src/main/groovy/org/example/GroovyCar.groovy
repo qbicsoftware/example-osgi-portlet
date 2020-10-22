@@ -4,12 +4,10 @@ import com.liferay.portal.kernel.log.Log
 import com.liferay.portal.kernel.log.LogFactoryUtil
 
 /**
- * <class short description - 1 Line!>
- *
- * <More detailed description - When to use, what it solves, etc.>
+ * This class simulates a car engine startup routine by printing the corresponding sounds into the log. It functions as a litmus test for groovy support in the OSGi framework.
  *
  * @author Sven Fillinger
- * @since <versiontag>
+ * @since 1.10
  */
 class GroovyCar {
 
