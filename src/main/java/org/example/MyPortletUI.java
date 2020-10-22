@@ -45,6 +45,8 @@ public class MyPortletUI extends UI {
         addPortletInfo(layout);
 
         setContent(layout);
+
+        GroovyCar.start();
     }
 
     private Layout getPortletContent() {
