@@ -11,10 +11,6 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-//import life.qbic.example.osgi.dependency.LibraryExample;
-
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
 
@@ -35,12 +31,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class MyPortletUI extends UI {
     private static final Log log = LogFactoryUtil.getLog(MyPortletUI.class);
 
-    // Get Bundle metadata at runtime
-    //private static final Bundle bundle = FrameworkUtil.getBundle(MyPortletUI.class);
-   // private static final String portletName    = bundle.getHeaders().get("Bundle-Name");
-    //private static final String portletVersion = bundle.getVersion().toString();
-    //private static final String portletRepoURL = bundle.getHeaders().get("Bundle-DocURL");
-
+    private static final PortletInformation info = new PortletInformation();
 
     @Override
     protected void init(VaadinRequest request) {
@@ -49,12 +40,6 @@ public class MyPortletUI extends UI {
         // Get user of current request. Is null if user is not logged in
         String user = VaadinService.getCurrentRequest().getRemoteUser();
         log.debug("Page requested from: " + user);
-
-        // Create layout with error message if user is not logged in
-        if (user == null) {
-            setContent(buildNotLoggedInLayout());
-            return;
-        }
 
         final Layout layout = getPortletContent();
         addPortletInfo(layout);
@@ -70,7 +55,7 @@ public class MyPortletUI extends UI {
         // Button which on click communicates with the example osgi library
         final Button random = new Button("Get Random String");
         random.addClickListener( event -> {
-            String tmp = ""; //LibraryExample.getRandomString();""
+            String tmp = "Fixed String!";
             textArea.addComponent(
                     new Label("<p>"+tmp.replace("\n", "<br/>")+"</p>", ContentMode.HTML) );
         });
@@ -93,8 +78,7 @@ public class MyPortletUI extends UI {
     }
 
     private void addPortletInfo(final Layout layout) {
-        String info = ""; //String.format("%s %s (<a href=\"%s\">%s</a>)",
-                //portletName, portletVersion, portletRepoURL, portletRepoURL);
+        String info = getPortletInfoAsHTML();
 
         final Label portletInfoLabel = new Label(info, ContentMode.HTML);
         portletInfoLabel.addStyleName("portlet-footer");
@@ -104,23 +88,11 @@ public class MyPortletUI extends UI {
         ((VerticalLayout) layout).setComponentAlignment(portletInfoLabel, Alignment.MIDDLE_RIGHT);
     }
 
-
-    /**
-     * Creates a layout with just an error message that the user should log in.
-     *
-     * @return Layout containing error message
-     */
-    public static Layout buildNotLoggedInLayout() {
-        Label error = new Label("You have to be logged in to use this portlet.", ContentMode.HTML);
-        error.addStyleNames("bigger", "redder");
-
-        VerticalLayout loggedOut = new VerticalLayout();
-        loggedOut.setWidth("100%");  // setSizeFull() does not work with setContent() in UI ...
-        loggedOut.setMargin(true);
-        loggedOut.setSpacing(true);
-        loggedOut.addComponent(error);
-        loggedOut.setComponentAlignment( error, Alignment.MIDDLE_CENTER );
-
-        return loggedOut;
+    private static String getPortletInfoAsHTML() {
+        return String.format("%s %s (<a href=\"%s\">%s</a>)",
+            info.getPortletName(),
+            info.getPortletVersion(),
+            info.getPortletRepoURL(),
+            info.getPortletRepoURL());
     }
 }
