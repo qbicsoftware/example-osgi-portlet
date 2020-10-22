@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.example</groupId>
 	<artifactId>example-osgi-portlet</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0-SNAPSHOT</version>
 	<name>Example OSGi Portlet</name>
 	<url>https://github.com/qbicsoftware/example-osgi-portlet</url>
 
@@ -14,6 +14,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+    
+		<groovy.version>3.0.6</groovy.version>
 
 		<liferay.version>7.3.5</liferay.version>
 		<vaadin.version>8.12.0</vaadin.version>
@@ -22,10 +24,19 @@
 	</properties>
 
 	<repositories>
-		<!-- Liferay Public Repo -->
+		<!-- Maven central first, as most dependencies are hosted there anyway -->
 		<repository>
-			<id>liferay-public</id>
-			<url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+				<checksumPolicy>fail</checksumPolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>maven-central</id>
+			<name>Maven central</name>
+			<url>https://repo.maven.apache.org/maven2</url>
 		</repository>
 
 		<!-- QBiC Nexus Repo -->
@@ -55,6 +66,12 @@
 			<name>QBiC Releases</name>
 			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
+
+		<!-- Liferay Public Repo -->
+		<repository>
+			<id>liferay-public</id>
+			<url>https://repository-cdn.liferay.com/nexus/content/groups/public</url>
+		</repository>
 	</repositories>
 
 	<dependencyManagement>
@@ -74,10 +91,34 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>com.liferay.portal</groupId>
+				<artifactId>release.portal.bom</artifactId>
+				<version>${liferay.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.codehaus.groovy</groupId>
+				<artifactId>groovy-bom</artifactId>
+				<version>${groovy.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- Groovy dependencies -->
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy-all</artifactId>
+			<version>${groovy.version}</version>
+			<type>pom</type>
+			<scope>${osgi.scope}</scope>
+		</dependency>
+
 		<!-- Vaadin dependencies -->
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -149,6 +190,27 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>1.10.1</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>addSources</goal>
+							<goal>addTestSources</goal>
+							<goal>generateStubs</goal>
+							<goal>compile</goal>
+							<goal>generateTestStubs</goal>
+							<goal>compileTests</goal>
+							<goal>removeStubs</goal>
+							<goal>removeTestStubs</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
