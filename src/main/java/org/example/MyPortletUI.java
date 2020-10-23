@@ -19,7 +19,6 @@ import org.osgi.service.component.annotations.ServiceScope;
 
 @Theme("mytheme")
 @SuppressWarnings("serial")
-//@Widgetset("life.qbic.portal.portlet.AppWidgetSet")
 @Component(
         service = UI.class,
         property = {
