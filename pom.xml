@@ -51,7 +51,7 @@
 			</snapshots>
 			<id>nexus-snapshots</id>
 			<name>QBiC Snapshots</name>
-			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-snapshots</url>
+			<url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-snapshots</url>
 		</repository>
 		<repository>
 			<releases>
@@ -64,7 +64,7 @@
 			</snapshots>
 			<id>nexus-releases</id>
 			<name>QBiC Releases</name>
-			<url>https://qbic-repo.am10.uni-tuebingen.de/repository/maven-releases</url>
+			<url>https://qbic-repo.qbic.uni-tuebingen.de/repository/maven-releases</url>
 		</repository>
 
 		<!-- Liferay Public Repo -->
@@ -84,13 +84,6 @@
 				<scope>import</scope>
 			</dependency>
 
-			<dependency>
-				<groupId>com.liferay.portal</groupId>
-				<artifactId>release.portal.bom</artifactId>
-				<version>${liferay.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 			<dependency>
 				<groupId>com.liferay.portal</groupId>
 				<artifactId>release.portal.bom</artifactId>
@@ -180,6 +173,14 @@
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.service.component.annotations</artifactId>
 			<version>1.4.0</version>
+			<scope>${osgi.scope}</scope>
+		</dependency>
+
+		<!-- Example OSGi lib dependency - For testing purposes only -->
+		<dependency>
+			<groupId>life.qbic</groupId>
+			<artifactId>garage</artifactId>
+			<version>0.1.0-SNAPSHOT</version>
 			<scope>${osgi.scope}</scope>
 		</dependency>
 	</dependencies>
