@@ -11,6 +11,8 @@ import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
+import life.qbic.example.Car;
+import life.qbic.example.Garage;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ServiceScope;
 
@@ -22,7 +24,7 @@ import org.osgi.service.component.annotations.ServiceScope;
         service = UI.class,
         property = {
         "com.liferay.portlet.display-category=category.sample",  // Widget category
-        "javax.portlet.name=example-osgi-portlet-1.1.0",       // Unique portlet name in Liferay
+        "javax.portlet.name=example-osgi-portlet-1.2.0",       // Unique portlet name in Liferay
         "javax.portlet.display-name=OSGi Portlet",               // Portlet display name
         "javax.portlet.security-role-ref=power-user,user",       // Default user roles
         "com.vaadin.osgi.liferay.portlet-ui=true" },             // Is Vaadin UI?
@@ -45,7 +47,12 @@ public class MyPortletUI extends UI {
 
         setContent(layout);
 
+        // Validate Groovy compilation works
         GroovyCar.start();
+
+        // Validate external OSGi bundle works
+        Car car = Garage.requestCar();
+        car.startEngine();
     }
 
     private Layout getPortletContent() {
