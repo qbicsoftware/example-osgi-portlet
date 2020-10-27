@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0 (2020-10-23)
+
+* Add garage dependency. This serves as a validation step for house-made
+  OSGi bundles.
+
 ## 1.1.0 (2020-10-22)
 
 * Support for Groovy 3.0.6
